@@ -1,0 +1,101 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+     allow read, write: if
+         request.time < timestamp.date(2024, 3, 12);
+    }
+    // match /chatRooms/{userUID} {
+    // 	allow read, update, create: if 
+    //   	request.auth != null && 
+    //     request.auth.uid == userUID ||
+    //     request.auth.token.vssAdmin == true;
+      
+    //   match /messages/{document=**} {
+    //   	allow read, create, update: if 
+    //     	request.auth != null && 
+    //       (request.auth.uid == userUID ||
+    //       request.auth.token.vssAdmin == true); 
+    //   }
+    // }
+    
+    // match /buses/{document=**} {
+    // 	// Everyone can read
+    //   // Admin can update
+    //   // Only SuperAdmin can create and delete
+    // 	allow read: if request.auth != null;
+    // 	allow create: if 
+    //     request.auth != null 
+    //     && request.auth.token.superAdmin == true;
+    //   allow update: if 
+    //     request.auth != null 
+    //     && request.auth.token.admin == true;
+    //   allow delete: if
+    //   	request.auth != null
+    //     && request.auth.token.goddess == true;
+        
+    //   match /trips/{tripID} {
+    //   	allow read: if 
+    //     	request.auth != null;
+    //   	allow update: if 
+    //     	request.auth != null;
+    //     allow create: if
+    //       request.auth != null
+    //       && request.auth.token.superAdmin == true;
+    //     allow delete: if
+    //       request.auth != null
+    //       && request.auth.token.superAdmin == true;
+    //   }
+    // }
+    
+    // match /wishes/{userUID} {
+    // 	allow read: if request.auth != null;
+    //   allow write: if 
+    //   	request.auth != null && 
+    //   	request.auth.uid == userUID;
+    // }
+    
+    // match /topics/{document=**} {
+    // 	allow read: if true;
+      
+    //   match /subscribers/{userUID} {
+    //       allow read, write: if 
+    //       	request.auth != null && 
+    //         request.auth.uid == userUID
+    //     }
+
+    // }
+    
+    // match /messaging/{document=**} {
+    // 	allow write: if 
+    //     request.auth != null && 
+    //     request.auth.token.admin == true;
+    //   allow read: if true;
+    // }
+    
+    // match /users/{userUID} {
+    // 	allow read, update: if 
+    //   	request.auth != null && 
+    //   	(request.auth.uid == userUID || 
+    //     request.auth.token.admin == true);
+    // 	allow create: if request.auth != null; 
+    // }
+    
+    // // Collection of Admin users : admin, superAdmin, vssAdmin, goddess
+    // match /specialUsers/{userUID} {
+    // 	// Admin can read and update himself
+    //   // Only goddess can read and write everyone
+    // 	allow read, update: if
+    //   	request.auth != null &&
+    //     request.auth.token.admin == true &&
+    //     (request.auth.uid == userUID || request.auth.token.goddess == true);
+    //   allow read, write: if
+    //   	request.auth != null &&
+    //     request.auth.token.goddess == true;
+    // }
+    
+    // match /events/{document=**} {
+    // 	allow read, write: if true;
+    // }
+  }
+}
